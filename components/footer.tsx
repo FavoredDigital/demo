@@ -124,7 +124,7 @@ function FooterDiv() {
   );
 }
 
-export default function Footer() {
+export function Footer() {
   return (
     <Suspense fallback={<div className="bg-background" />}>
       <FooterDiv />

@@ -110,7 +110,7 @@ function NavbarDiv() {
   );
 }
 
-export default function Navbar() {
+export function Navbar() {
   return (
     <Suspense fallback={<div className="bg-background" />}>
       <NavbarDiv />

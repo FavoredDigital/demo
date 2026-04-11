@@ -112,7 +112,7 @@ function TestimonialsDiv() {
   );
 }
 
-export default function Testimonials() {
+export function Testimonials() {
   return (
     <Suspense fallback={<div className="bg-background" />}>
       <TestimonialsDiv />
