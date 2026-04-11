@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { useShopInfo } from "@/hooks/use-shop-info";
 import { Star } from "lucide-react";
 
-export function TestimonialsDiv() {
+function TestimonialsDiv() {
   const { shopName } = useShopInfo();
 
   const testimonials = [
