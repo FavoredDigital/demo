@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useShopInfo } from "@/hooks/use-shop-info";
@@ -14,7 +15,7 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-export function Navbar() {
+function NavbarDiv() {
   const { shopName, phone } = useShopInfo();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -106,5 +107,13 @@ export function Navbar() {
         </div>
       )}
     </header>
+  );
+}
+
+export default function Navbar() {
+  return (
+    <Suspense fallback={<div className="bg-background" />}>
+      <NavbarDiv />
+    </Suspense>
   );
 }

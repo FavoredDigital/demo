@@ -1,9 +1,10 @@
 "use client";
 
+import { Suspense } from "react";
 import { useShopInfo } from "@/hooks/use-shop-info";
 import { Star } from "lucide-react";
 
-export function Testimonials() {
+export function TestimonialsDiv() {
   const { shopName } = useShopInfo();
 
   const testimonials = [
@@ -108,5 +109,13 @@ export function Testimonials() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function Testimonials() {
+  return (
+    <Suspense fallback={<div className="bg-background" />}>
+      <TestimonialsDiv />
+    </Suspense>
   );
 }

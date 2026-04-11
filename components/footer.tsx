@@ -1,10 +1,11 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { useShopInfo } from "@/hooks/use-shop-info";
 import { Phone, MapPin, Clock, Wrench } from "lucide-react";
 
-export function Footer() {
+function FooterDiv() {
   const { shopName, city, phone } = useShopInfo();
 
   return (
@@ -120,5 +121,13 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+export default function Footer() {
+  return (
+    <Suspense fallback={<div className="bg-background" />}>
+      <FooterDiv />
+    </Suspense>
   );
 }
