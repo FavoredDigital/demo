@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-export function HeroSectionDiv() {
+function HeroSectionDiv() {
   const { shopName, city, phone } = useShopInfo();
 
   return (
@@ -91,7 +91,7 @@ export function HeroSectionDiv() {
   );
 }
 
-export default function HeroSection() {
+export function HeroSection() {
   return (
     <Suspense fallback={<div className="bg-background" />}>
       <HeroSectionDiv />
