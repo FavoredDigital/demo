@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import { useShopInfo } from "@/hooks/use-shop-info";
 import { Button } from "@/components/ui/button";
 import { Phone, ChevronRight } from "lucide-react";
+import Image from "next/image"
+
 import Link from "next/link";
 
 function HeroSectionDiv() {
@@ -11,6 +13,16 @@ function HeroSectionDiv() {
 
   return (
     <section className="relative overflow-hidden bg-background">
+      <div className="absolute inset-0">
+        <Image
+          src="/redcar.jpg"
+          alt="red car"
+          fill
+          className="object-cover object-top opacity-20"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-navy/40" />
+      </div>
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYtMi42ODYgNi02cy0yLjY4Ni02LTYtNi02IDIuNjg2LTYgNiAyLjY4NiA2IDYgNnoiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvZz48L3N2Zz4=')] opacity-50" />
