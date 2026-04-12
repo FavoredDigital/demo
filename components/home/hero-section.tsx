@@ -15,7 +15,7 @@ function HeroSectionDiv() {
     <section className="relative overflow-hidden bg-background">
       <div className="absolute inset-0">
         <Image
-          src="/redcar.jpg"
+          src="/demo/redcar.jpg"
           alt="red car"
           fill
           className="object-cover object-top opacity-20"
