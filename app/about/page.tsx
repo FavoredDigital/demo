@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import { useShopInfo } from "@/hooks/use-shop-info";
 import { Button } from "@/components/ui/button";
+import Image from "next/image"
 import Link from "next/link";
 import {
   Award,
@@ -54,9 +55,21 @@ function AboutContent() {
   const { shopName, city, phone } = useShopInfo();
 
   return (
-    <div className="bg-background">
+    <div className="bg-background relative overflow-hidden bg-background">
       {/* Hero Section */}
       <section className="border-b border-border bg-card py-16 lg:py-24">
+      <div className="absolute inset-0 ">
+        <Image
+          src="/demo/convertible.jpg"
+          alt="red car"
+          fill
+          className="object-cover object-top opacity-5"
+          priority
+          style={{objectPosition: "left 60%"}}
+
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-navy/40" />
+      </div>
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-semibold uppercase tracking-wider text-primary">

@@ -56,7 +56,7 @@ export function ServicesOverview() {
           <h2 className="mt-2 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Our Services
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-pretty text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-2xl text-xl text-pretty text-white">
             From routine maintenance to complete custom builds, we have the
             expertise and equipment to handle it all.
           </p>
@@ -76,7 +76,7 @@ export function ServicesOverview() {
               <h3 className="mt-4 text-lg font-semibold text-foreground">
                 {service.name}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-2 text-sm leading-relaxed text-white">
                 {service.description}
               </p>
               <div className="mt-4 flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">

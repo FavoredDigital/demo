@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import { useShopInfo } from "@/hooks/use-shop-info";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image"
+
 import {
   Droplets,
   Disc,
@@ -171,9 +173,20 @@ function ServicesContent() {
   const { shopName, phone } = useShopInfo();
 
   return (
-    <div className="bg-background">
+    <div className="bg-background relative overflow-hidden bg-background">
       {/* Hero Section */}
-      <section className="border-b border-border bg-card py-16 lg:py-24">
+      <section className="border-b border-border py-16 lg:py-24">
+      <div className="absolute inset-0">
+        <Image
+          src="/demo/toolbox.jpg"
+          alt="red car"
+          fill
+          className="object-cover object-top opacity-3"
+          priority
+          style={{objectPosition: "center 60%"}}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy/80" />
+      </div>
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-semibold uppercase tracking-wider text-primary">
@@ -182,7 +195,7 @@ function ServicesContent() {
             <h1 className="mt-2 text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
               Complete Auto Care
             </h1>
-            <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-background">
               At {shopName}, we offer a full range of automotive services. From
               routine maintenance to complex repairs and custom builds, our
               expert technicians have you covered.
@@ -203,17 +216,17 @@ function ServicesContent() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <service.icon className="h-6 w-6" />
                 </div>
-                <h3 className="mt-4 text-xl font-semibold text-foreground">
+                <h3 className="mt-4 text-xl font-semibold text-white">
                   {service.name}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-m leading-relaxed text-white">
                   {service.description}
                 </p>
                 <ul className="mt-4 space-y-2">
                   {service.features.map((feature) => (
                     <li
                       key={feature}
-                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                      className="flex items-center gap-2 text-sm text-white"
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                       {feature}
@@ -232,14 +245,14 @@ function ServicesContent() {
           <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Ready to Get Started?
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-pretty text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-xl text-pretty text-white">
             Contact us today to schedule your service or get a free estimate.
             Our team is ready to help keep your vehicle running its best.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button asChild size="lg">
               <a href={`tel:${phone.replace(/[^0-9]/g, "")}`}>
-                <Phone className="mr-2 h-5 w-5" />
+                <Phone className="mr-2 h-5 w-5 " />
                 Call {phone}
               </a>
             </Button>

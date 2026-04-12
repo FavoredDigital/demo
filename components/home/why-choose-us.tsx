@@ -36,7 +36,7 @@ export function WhyChooseUs() {
             <h2 className="mt-2 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Quality You Can Trust
             </h2>
-            <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
+            <p className="mt-4 text-pretty leading-relaxed text-white">
               When it comes to your vehicle, you deserve a shop that treats it
               like their own. We combine old-school craftsmanship with modern
               technology to deliver results that exceed expectations.

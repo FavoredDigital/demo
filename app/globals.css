@@ -6,7 +6,7 @@
 :root {
   /* Dark charcoal/navy background with orange accents */
   --background: oklch(0.15 0.01 250);
-  --foreground: oklch(0.95 0 0);
+  --foreground: oklch(99.779% 0.00104 11.135);
   --card: oklch(0.18 0.01 250);
   --card-foreground: oklch(0.95 0 0);
   --popover: oklch(0.18 0.01 250);
@@ -16,7 +16,7 @@
   --secondary: oklch(0.22 0.01 250);
   --secondary-foreground: oklch(0.95 0 0);
   --muted: oklch(0.25 0.01 250);
-  --muted-foreground: oklch(0.65 0 0);
+  --muted-foreground: oklch(85.761% 0.0001 271.152);
   --accent: oklch(0.7 0.18 45);
   --accent-foreground: oklch(0.12 0 0);
   --destructive: oklch(0.55 0.22 25);

@@ -42,7 +42,7 @@ function NavbarDiv() {
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 pathname === link.href
                   ? "text-primary"
-                  : "text-muted-foreground"
+                  : "text-white"
               }`}
             >
               {link.label}
@@ -90,7 +90,7 @@ function NavbarDiv() {
                 className={`block rounded-lg px-3 py-2 text-base font-medium transition-colors ${
                   pathname === link.href
                     ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    : "text-white hover:bg-muted hover:text-white"
                 }`}
               >
                 {link.label}

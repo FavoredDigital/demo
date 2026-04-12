@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, MapPin, Clock, Mail, Send, CheckCircle } from "lucide-react";
+import Image from "next/image"
+
 
 function ContactContent() {
   const { shopName, city, phone } = useShopInfo();
@@ -19,9 +21,22 @@ function ContactContent() {
   };
 
   return (
-    <div className="bg-background">
+    <div className="bg-background relative overflow-hidden bg-background">
+      <div className="absolute inset-0 ">
+        <Image
+          src="/demo/carshop.jpg"
+          alt="red car"
+          fill
+          className="object-cover object-top opacity-10"
+          priority
+          style={{objectPosition: "left 60%"}}
+
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-navy/40" />
+      </div>
       {/* Hero Section */}
       <section className="border-b border-border bg-card py-16 lg:py-24">
+
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-semibold uppercase tracking-wider text-primary">

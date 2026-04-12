@@ -36,13 +36,13 @@ function HeroSectionDiv() {
           </div>
 
           {/* Headline */}
-          <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-white">
             Expert Auto Repair at{" "}
             <span className="text-primary">{shopName}</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
+          <p className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-white sm:text-xl">
             Serving {city} with honest, quality auto repair and custom builds.
             From routine maintenance to complete restorations, your vehicle is
             in expert hands.
