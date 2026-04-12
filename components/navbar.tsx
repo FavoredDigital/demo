@@ -39,7 +39,7 @@ function NavbarDiv() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`text-xl font-large transition-colors hover:text-primary ${
                 pathname === link.href
                   ? "text-primary"
                   : "text-white"
