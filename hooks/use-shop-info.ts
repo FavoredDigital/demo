@@ -1,71 +1,107 @@
-"use client";
+"use client"
 
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
+import { useSearchParams } from "next/navigation"
 
-interface ShopInfo {
-  shopName: string;
-  city: string;
-  phone: string;
+interface ShopHours {
+  Monday: string
+  Tuesday: string
+  Wednesday: string
+  Thursday: string
+  Friday: string
+  Saturday: string
+  Sunday: string
 }
 
-const STORAGE_KEYS = {
-  shopName: "shop",
-  city: "city",
-  phone: "phone",
-};
+interface ShopInfo {
+  name: string
+  city: string
+  phone: string
+  email: string
+  address: string
+  state: string
+  zip: string
+  established: number
+  tagline: string
+  hours: ShopHours
+}
+
+const DEFAULT_HOURS: ShopHours = {
+  Monday: "8:00 AM - 6:00 PM",
+  Tuesday: "8:00 AM - 6:00 PM",
+  Wednesday: "8:00 AM - 6:00 PM",
+  Thursday: "8:00 AM - 6:00 PM",
+  Friday: "8:00 AM - 6:00 PM",
+  Saturday: "9:00 AM - 3:00 PM",
+  Sunday: "Closed",
+}
 
 const DEFAULTS: ShopInfo = {
-  shopName: "Your Shop Name",
-  city: "Your City",
-  phone: "Your Phone Number",
-};
+  name: "Heritage Auto Works",
+  city: "Austin",
+  phone: "(512) 555-0147",
+  email: "service@heritageautoworks.com",
+  address: "4521 Vintage Lane",
+  state: "TX",
+  zip: "78745",
+  established: 1987,
+  tagline: "Where Craftsmanship Meets Performance",
+  hours: DEFAULT_HOURS,
+}
+
+const STORAGE_KEY = "shop_info"
 
 export function useShopInfo(): ShopInfo {
-  const searchParams = useSearchParams();
-  const [shopInfo, setShopInfo] = useState<ShopInfo>(DEFAULTS);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const searchParams = useSearchParams()
+  const [shopInfo, setShopInfo] = useState<ShopInfo>(DEFAULTS)
+  const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {
-    // Only run on client side
-    if (typeof window === "undefined") return;
+    // Check for URL params first
+    const nameParam = searchParams.get("name")
+    const cityParam = searchParams.get("city")
+    const phoneParam = searchParams.get("phone")
 
-    // Get URL params
-    const shopParam = searchParams.get("shop");
-    const cityParam = searchParams.get("city");
-    const phoneParam = searchParams.get("phone");
+    let newShopInfo: ShopInfo | null = null
 
-    // If URL params exist, store them in sessionStorage
-    if (shopParam) {
-      sessionStorage.setItem(STORAGE_KEYS.shopName, shopParam);
+    if (nameParam || cityParam || phoneParam) {
+      // Build shop info from URL params
+      newShopInfo = {
+        ...DEFAULTS,
+        name: nameParam || DEFAULTS.name,
+        city: cityParam || DEFAULTS.city,
+        phone: phoneParam || DEFAULTS.phone,
+      }
+      // Store in sessionStorage
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(newShopInfo))
     }
-    if (cityParam) {
-      sessionStorage.setItem(STORAGE_KEYS.city, cityParam);
-    }
-    if (phoneParam) {
-      sessionStorage.setItem(STORAGE_KEYS.phone, phoneParam);
+
+    // If no URL params, try to get from sessionStorage
+    if (!newShopInfo) {
+      const storedData = sessionStorage.getItem(STORAGE_KEY)
+      if (storedData) {
+        try {
+          newShopInfo = JSON.parse(storedData) as ShopInfo
+        } catch {
+          newShopInfo = null
+        }
+      }
     }
 
-    // Read from sessionStorage first, fallback to URL params, then defaults
-    const shopName =
-      sessionStorage.getItem(STORAGE_KEYS.shopName) ||
-      shopParam ||
-      DEFAULTS.shopName;
-    const city =
-      sessionStorage.getItem(STORAGE_KEYS.city) || cityParam || DEFAULTS.city;
-    const phone =
-      sessionStorage.getItem(STORAGE_KEYS.phone) ||
-      phoneParam ||
-      DEFAULTS.phone;
+    // Use shop info if found, otherwise use defaults
+    if (newShopInfo) {
+      setShopInfo(newShopInfo)
+    } else {
+      setShopInfo(DEFAULTS)
+    }
 
-    setShopInfo({ shopName, city, phone });
-    setIsInitialized(true);
-  }, [searchParams]);
+    setIsInitialized(true)
+  }, [searchParams])
 
   // Return defaults during SSR, actual values after hydration
   if (!isInitialized) {
-    return DEFAULTS;
+    return DEFAULTS
   }
 
-  return shopInfo;
+  return shopInfo
 }

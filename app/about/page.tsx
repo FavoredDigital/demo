@@ -1,189 +1,128 @@
-"use client";
+"use client"
 
-import { Suspense } from "react";
-import { useShopInfo } from "@/hooks/use-shop-info";
-import { Button } from "@/components/ui/button";
 import Image from "next/image"
-import Link from "next/link";
-import {
-  Award,
-  Users,
-  Wrench,
-  Heart,
-  Shield,
-  Clock,
-  Phone,
-} from "lucide-react";
+import Link from "next/link"
+import { useShopInfo } from "@/hooks/use-shop-info"
+import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/footer"
+import { ArrowRight } from "lucide-react"
 
-const values = [
-  {
-    name: "Honesty",
-    description:
-      "We tell you what your car needs, not what makes us the most money. Transparent pricing and honest recommendations are our foundation.",
-    icon: Heart,
-  },
-  {
-    name: "Quality",
-    description:
-      "We use premium parts and proven techniques. Every job is done right the first time, backed by our satisfaction guarantee.",
-    icon: Award,
-  },
-  {
-    name: "Reliability",
-    description:
-      "When we say it will be ready, it will be ready. We respect your time and keep you informed every step of the way.",
-    icon: Clock,
-  },
-  {
-    name: "Expertise",
-    description:
-      "Our technicians are ASE certified and continuously trained on the latest automotive technologies and repair techniques.",
-    icon: Wrench,
-  },
-];
+export default function AboutPage() {
+  const shop = useShopInfo()
 
-const milestones = [
-  { year: "1999", event: "Shop founded with just two bays and a dream" },
-  { year: "2005", event: "Expanded to 6 bays and added custom build division" },
-  { year: "2010", event: "Earned ASE Blue Seal of Excellence recognition" },
-  { year: "2015", event: "Opened dedicated restoration and detailing facility" },
-  { year: "2020", event: "Celebrated serving over 10,000 customers" },
-  { year: "Today", event: "Continuing to serve our community with excellence" },
-];
+  const values = [
+    {
+      title: "Precision",
+      description: "Every detail matters. We approach each vehicle with meticulous attention and exacting standards.",
+    },
+    {
+      title: "Integrity",
+      description: "Honest assessments, transparent pricing, and work we stand behind without exception.",
+    },
+    {
+      title: "Excellence",
+      description: "We continuously refine our craft, investing in training and the latest diagnostic technology.",
+    },
+    {
+      title: "Passion",
+      description: "We are automotive enthusiasts first. Your vehicle receives the care we would give our own.",
+    },
+  ]
 
-function AboutContent() {
-  const { shopName, city, phone } = useShopInfo();
+  const timeline = [
+    { year: shop.established, title: "Founded", description: "Started as a small family operation with a vision for excellence" },
+    { year: shop.established + 10, title: "Expansion", description: "Added restoration services and expanded our facility" },
+    { year: shop.established + 20, title: "Recognition", description: "Achieved ASE Blue Seal certification" },
+    { year: shop.established + 30, title: "Innovation", description: "Invested in cutting-edge diagnostic technology" },
+  ]
 
   return (
-    <div className="bg-background relative overflow-hidden bg-background">
-      {/* Hero Section */}
-      <section className="border-b border-border bg-card py-16 lg:py-24">
-      <div className="absolute inset-0 ">
-        <Image
-          src="/demo/convertible.jpg"
-          alt="red car"
-          fill
-          className="object-cover object-top opacity-5"
-          priority
-          style={{objectPosition: "left 60%"}}
+    <div className="min-h-screen bg-background">
+      <Navbar />
 
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/60 to-navy/40" />
-      </div>
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-              About Us
-            </p>
-            <h1 className="mt-2 text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-              Our Story
-            </h1>
-            <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
-              For over 25 years, {shopName} has been the trusted auto repair
-              destination for families throughout {city}. What started as a
-              small two-bay garage has grown into a full-service automotive
-              center, but our commitment to honest, quality service has never
-              changed.
-            </p>
-          </div>
+      {/* Hero Section */}
+      <section className="relative h-[60vh] min-h-[500px] flex items-end pb-16">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/workshop.jpg"
+            alt="Heritage Auto Works workshop"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
+        </div>
+
+        <div className="container relative z-10 mx-auto px-6 lg:px-8">
+          <p className="text-xs uppercase tracking-widest text-primary mb-4">Since {shop.established}</p>
+          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-4">
+            Our Story
+          </h1>
+          <p className="text-white/70 text-lg max-w-xl">
+            A legacy of automotive excellence built on passion, precision, and an unwavering commitment to craft.
+          </p>
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+      {/* Story Section */}
+      <section className="py-24 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div>
-              <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                More Than Just Repairs
+              <p className="text-xs uppercase tracking-widest text-primary mb-4">The Beginning</p>
+              <h2 className="font-display text-4xl md:text-5xl text-foreground mb-8 leading-tight">
+                Built on a foundation of excellence
               </h2>
-              <p className="mt-6 text-pretty leading-relaxed text-muted-foreground">
-                We believe in building relationships, not just fixing cars. When
-                you bring your vehicle to {shopName}, you become part of our
-                family. We take the time to explain what is happening with your
-                car, offer honest recommendations, and stand behind every repair
-                we make.
-              </p>
-              <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
-                Our team of certified technicians brings decades of combined
-                experience to every job. From vintage restorations to modern
-                computer diagnostics, we have the skills and equipment to handle
-                it all.
-              </p>
-
-              <div className="mt-8 grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                    <Users className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-foreground">12</div>
-                    <div className="text-sm text-muted-foreground">
-                      Expert Technicians
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                    <Shield className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-foreground">
-                      25+
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Years of Service
-                    </div>
-                  </div>
-                </div>
+              <div className="space-y-6 text-muted-foreground leading-relaxed">
+                <p>
+                  {shop.name} was founded in {shop.established} with a simple belief: that every 
+                  vehicle deserves exceptional care, and every owner deserves complete transparency.
+                </p>
+                <p>
+                  What began as a modest two-bay garage has evolved into {shop.city}&apos;s 
+                  premier destination for discerning automotive enthusiasts. Our growth has been 
+                  driven not by ambition, but by reputation—earned one satisfied client at a time.
+                </p>
+                <p>
+                  Today, our team of master technicians brings together over a century of combined 
+                  experience, from classic restoration to cutting-edge performance engineering. 
+                  Yet our commitment remains unchanged: precision craftsmanship, honest service, 
+                  and results that exceed expectations.
+                </p>
               </div>
             </div>
-
-            {/* Timeline */}
-            <div className="relative">
-              <div className="absolute left-4 top-0 h-full w-px bg-border" />
-              <div className="space-y-8">
-                {milestones.map((milestone, index) => (
-                  <div key={index} className="relative flex gap-6 pl-4">
-                    <div className="absolute left-0 top-1 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-primary bg-background" />
-                    <div>
-                      <div className="text-sm font-semibold text-primary">
-                        {milestone.year}
-                      </div>
-                      <div className="mt-1 text-sm text-muted-foreground">
-                        {milestone.event}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="relative h-[500px] lg:h-[600px]">
+              <Image
+                src="/images/hero-car.jpg"
+                alt="Heritage Auto Works"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Values Section */}
-      <section className="border-y border-border bg-card py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <div className="text-center">
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+      <section className="py-24 lg:py-32 bg-card border-y border-border">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <p className="text-xs uppercase tracking-widest text-primary mb-4">What Drives Us</p>
+            <h2 className="font-display text-4xl md:text-5xl text-foreground">
               Our Values
-            </p>
-            <h2 className="mt-2 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              What We Stand For
             </h2>
           </div>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((value) => (
-              <div key={value.name} className="text-center">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10">
-                  <value.icon className="h-7 w-7 text-primary" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-foreground">
-                  {value.name}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {values.map((value, index) => (
+              <div key={index} className="text-center">
+                <span className="font-display text-5xl text-primary/20 block mb-4">
+                  0{index + 1}
+                </span>
+                <h3 className="font-display text-xl text-foreground mb-4">
+                  {value.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -192,57 +131,78 @@ function AboutContent() {
         </div>
       </section>
 
+      {/* Timeline Section */}
+      <section className="py-24 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-20">
+              <p className="text-xs uppercase tracking-widest text-primary mb-4">Our Journey</p>
+              <h2 className="font-display text-4xl md:text-5xl text-foreground">
+                {new Date().getFullYear() - shop.established} Years of Excellence
+              </h2>
+            </div>
+
+            <div className="space-y-0">
+              {timeline.map((item, index) => (
+                <div
+                  key={index}
+                  className="grid grid-cols-[80px_1fr] md:grid-cols-[120px_1fr] gap-8 pb-16 last:pb-0 relative"
+                >
+                  {index < timeline.length - 1 && (
+                    <div className="absolute left-[40px] md:left-[60px] top-12 bottom-0 w-px bg-border" />
+                  )}
+                  <div className="relative">
+                    <span className="font-display text-2xl md:text-3xl text-primary">
+                      {item.year}
+                    </span>
+                  </div>
+                  <div className="pt-1">
+                    <h3 className="font-display text-xl text-foreground mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Team Section */}
-      <section className="py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-              Our Team
-            </p>
-            <h2 className="mt-2 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              Meet the Experts
+      <section className="py-24 lg:py-32 bg-card border-y border-border">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <p className="text-xs uppercase tracking-widest text-primary mb-4">The Team</p>
+            <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
+              Master Craftsmen
             </h2>
-            <p className="mt-4 text-pretty text-muted-foreground">
-              Our ASE-certified technicians bring passion, expertise, and years
-              of experience to every job. They are not just mechanics — they are
-              car enthusiasts who take pride in their craft.
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Our technicians are not just mechanics—they are automotive artisans with a 
+              deep passion for their craft.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              {
-                name: "Mike Johnson",
-                role: "Owner & Master Technician",
-                experience: "30+ years experience",
-              },
-              {
-                name: "Sarah Chen",
-                role: "Service Manager",
-                experience: "15+ years experience",
-              },
-              {
-                name: "David Rodriguez",
-                role: "Custom Build Specialist",
-                experience: "20+ years experience",
-              },
-            ].map((member) => (
-              <div
-                key={member.name}
-                className="rounded-xl border border-border bg-card p-6 text-center"
-              >
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 text-2xl font-bold text-primary">
-                  {member.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
+              { name: "Michael Chen", role: "Founder & Master Technician", specialty: "Classic Restoration" },
+              { name: "Sarah Martinez", role: "Lead Performance Engineer", specialty: "Engine Tuning" },
+              { name: "James Wilson", role: "Fabrication Specialist", specialty: "Custom Work" },
+            ].map((member, index) => (
+              <div key={index} className="text-center p-8 border border-border hover:border-primary/30 transition-colors">
+                <div className="w-20 h-20 mx-auto mb-6 bg-primary/10 flex items-center justify-center">
+                  <span className="font-display text-2xl text-primary">
+                    {member.name.split(" ").map(n => n[0]).join("")}
+                  </span>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-foreground">
+                <h3 className="font-display text-lg text-foreground mb-1">
                   {member.name}
                 </h3>
-                <p className="text-sm text-primary">{member.role}</p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {member.experience}
+                <p className="text-sm text-primary mb-2">{member.role}</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                  {member.specialty}
                 </p>
               </div>
             ))}
@@ -251,36 +211,25 @@ function AboutContent() {
       </section>
 
       {/* CTA Section */}
-      <section className="border-t border-border bg-card py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 text-center lg:px-8">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Come See the Difference
+      <section className="py-24 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-8 text-center">
+          <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
+            Experience the difference
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-pretty text-muted-foreground">
-            Experience the {shopName} difference for yourself. Stop by for a
-            tour, or give us a call to schedule your first service.
+          <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
+            Join the community of enthusiasts who trust {shop.name} with their most prized vehicles.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg">
-              <a href={`tel:${phone.replace(/[^0-9]/g, "")}`}>
-                <Phone className="mr-2 h-5 w-5" />
-                Call {phone}
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/contact">Get Directions</Link>
-            </Button>
-          </div>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 text-sm font-medium tracking-widest uppercase hover:bg-primary/90 transition-colors"
+          >
+            Get in Touch
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
-    </div>
-  );
-}
 
-export default function AboutPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-background" />}>
-      <AboutContent />
-    </Suspense>
-  );
+      <Footer />
+    </div>
+  )
 }

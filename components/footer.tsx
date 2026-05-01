@@ -1,49 +1,42 @@
-"use client";
+"use client"
 
-import { Suspense } from "react";
-import Link from "next/link";
-import { useShopInfo } from "@/hooks/use-shop-info";
-import { Phone, MapPin, Clock, Wrench } from "lucide-react";
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
+import { useShopInfo } from "@/hooks/use-shop-info"
 
-function FooterDiv() {
-  const { shopName, city, phone } = useShopInfo();
+export function Footer() {
+  const shop = useShopInfo()
 
   return (
-    <footer className="border-t border-border bg-card">
-      <div className="mx-auto max-w-7xl px-4 py-12 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                <Wrench className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="text-lg font-bold tracking-tight text-foreground">
-                {shopName}
-              </span>
-            </Link>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              Your trusted auto repair and custom shop in {city}. Quality
-              service, honest prices, and expert craftsmanship.
+    <footer className="bg-card border-t border-border">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-24">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+          {/* Brand Column */}
+          <div className="lg:col-span-4">
+            <span className="font-display text-3xl font-semibold text-foreground">
+              {shop.name}
+            </span>
+            <p className="mt-6 text-muted-foreground leading-relaxed max-w-sm">
+              {shop.tagline}. Serving discerning automotive enthusiasts since {shop.established}.
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">
-              Quick Links
+          {/* Navigation */}
+          <div className="lg:col-span-2">
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Navigation
             </h3>
-            <ul className="space-y-3">
+            <ul className="mt-6 space-y-4">
               {[
                 { href: "/", label: "Home" },
                 { href: "/services", label: "Services" },
-                { href: "/about", label: "About Us" },
+                { href: "/about", label: "About" },
                 { href: "/contact", label: "Contact" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    className="text-sm text-foreground/80 hover:text-primary transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -53,23 +46,21 @@ function FooterDiv() {
           </div>
 
           {/* Services */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">
+          <div className="lg:col-span-2">
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
               Services
             </h3>
-            <ul className="space-y-3">
+            <ul className="mt-6 space-y-4">
               {[
-                "Oil Change",
-                "Brake Repair",
-                "Engine Diagnostics",
-                "Tire Rotation",
-                "Custom Builds",
-                "Detailing",
+                "Performance Tuning",
+                "Engine Rebuilds",
+                "Custom Fabrication",
+                "Diagnostics",
               ].map((service) => (
                 <li key={service}>
                   <Link
                     href="/services"
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    className="text-sm text-foreground/80 hover:text-primary transition-colors"
                   >
                     {service}
                   </Link>
@@ -78,56 +69,55 @@ function FooterDiv() {
             </ul>
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">
-              Contact Us
+          {/* Contact */}
+          <div className="lg:col-span-4">
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Visit Us
             </h3>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <a
-                  href={`tel:${phone.replace(/[^0-9]/g, "")}`}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
-                >
-                  {phone}
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <span className="text-sm text-muted-foreground">
-                  123 Auto Lane
-                  <br />
-                  {city}, ST 12345
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <span className="text-sm text-muted-foreground">
-                  Mon-Fri: 8am - 6pm
-                  <br />
-                  Sat: 9am - 3pm
-                </span>
-              </li>
-            </ul>
+            <address className="mt-6 not-italic text-sm text-foreground/80 space-y-2">
+              <p>{shop.address}</p>
+              <p>{shop.city}, {shop.state} {shop.zip}</p>
+            </address>
+            <div className="mt-6 space-y-2 text-sm">
+              <a
+                href={`tel:${shop.phone.replace(/[^0-9]/g, "")}`}
+                className="block text-foreground hover:text-primary transition-colors"
+              >
+                {shop.phone}
+              </a>
+              <a
+                href={`mailto:${shop.email}`}
+                className="block text-foreground hover:text-primary transition-colors"
+              >
+                {shop.email}
+              </a>
+            </div>
+            <div className="mt-8">
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              >
+                Schedule an appointment
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 border-t border-border pt-8">
-          <p className="text-center text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} {shopName}. All rights reserved.
+        <div className="mt-16 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} {shop.name}. All rights reserved.
           </p>
+          <div className="flex items-center gap-6">
+            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+              Terms of Service
+            </a>
+          </div>
         </div>
       </div>
     </footer>
-  );
-}
-
-export function Footer() {
-  return (
-    <Suspense fallback={<div className="bg-background" />}>
-      <FooterDiv />
-    </Suspense>
-  );
+  )
 }
